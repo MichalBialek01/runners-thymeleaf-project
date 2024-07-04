@@ -1,30 +1,31 @@
 package pl.bialek.runnersthymeleafproject.models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "club")
+@Table(name = "clubs")
 public class Club {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String title;
     private String photoURL;
     private String content;
     @CreationTimestamp
-    private LocalDateTime createdOn;
+    private LocalDateTime createdTime;
     @UpdateTimestamp
-    private LocalDateTime updatedOn;
-
+    private LocalDateTime updateTime;
 
 }
