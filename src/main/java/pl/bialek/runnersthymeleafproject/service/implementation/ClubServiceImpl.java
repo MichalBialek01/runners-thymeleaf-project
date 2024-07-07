@@ -25,7 +25,8 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Club saveClub(Club club) {
+    public Club saveClub(ClubDTO clubDto) {
+        Club club = maptoClub(clubDto);
         return clubRepository.save(club);
     }
 
