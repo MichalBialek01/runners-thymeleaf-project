@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
 import pl.bialek.runnersthymeleafproject.models.Club;
@@ -36,4 +37,19 @@ public class ClubController {
         clubService.saveClub(club);
         return "redirect:/clubs";
     }
+    @GetMapping("clubs/{clubId}/edit")
+    public String editClubForm(@PathVariable("clubId") Long clubId, Model model){
+        ClubDTO club = clubService.findClubById(clubId);
+        model.addAttribute("club",club);
+        return "clubs-edit";
+    }
+    @PostMapping("clubs/{clubId}/edit")
+    public String updateClub(@PathVariable("clubId") Long clubId, @ModelAttribute("club") ClubDTO club){
+        club.setId(clubId);
+        clubService.updateClub(club);
+        return "redirect:/clubs";
+    }
+
+
+
 }

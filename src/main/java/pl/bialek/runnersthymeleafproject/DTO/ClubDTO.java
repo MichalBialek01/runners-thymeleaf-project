@@ -10,10 +10,13 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class ClubDTO {
-    private int id;
+    private long id;
     private String title;
     private String photoURL;
     private String content;
     private LocalDateTime createdTime;
     private LocalDateTime updateTime;
+
+    public void updateClub(ClubDTO club) {
+    }
 }
