@@ -9,6 +9,8 @@
         <div class="container px-5">
             <a class="navbar-brand" href="index.html">Start Bootstrap</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
@@ -42,6 +44,11 @@
                 <p class="lead fw-normal text-muted mb-0">Runners found in your area</p>
             </div>
             <div class="row gx-5">
+                <div>
+                    <form th:action="@{/clubs/search}" class="form-inline my-2 my-lg-0 mb-3">
+                        <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search running clubs" aria-label="Search" >
+                    </form>
+                </div>
                 <div th:each="club : ${clubs}" class="col-lg-6" >
                     <div class="position-relative mb-5">
                         <img class="img-fluid rounded-3 mb-3" th:src="${club.photoURL}" alt="..." />
