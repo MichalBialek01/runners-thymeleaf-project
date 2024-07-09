@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,6 +22,7 @@ public class ClubDTO {
     private String content;
     private LocalDateTime createdTime;
     private LocalDateTime updateTime;
+    private List<EventDTO> events;
 
     public void updateClub(ClubDTO club) {
     }

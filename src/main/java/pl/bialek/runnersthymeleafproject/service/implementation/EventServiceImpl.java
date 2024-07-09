@@ -3,11 +3,19 @@ package pl.bialek.runnersthymeleafproject.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.bialek.runnersthymeleafproject.DTO.EventDTO;
+import pl.bialek.runnersthymeleafproject.mapper.EventMapper;
 import pl.bialek.runnersthymeleafproject.models.Club;
 import pl.bialek.runnersthymeleafproject.models.Event;
 import pl.bialek.runnersthymeleafproject.repository.ClubRepository;
 import pl.bialek.runnersthymeleafproject.repository.EventRepository;
 import pl.bialek.runnersthymeleafproject.service.EventService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static pl.bialek.runnersthymeleafproject.mapper.EventMapper.mapToEvent;
+import static pl.bialek.runnersthymeleafproject.mapper.EventMapper.mapToEventDTO;
+
 @Service
 public class EventServiceImpl implements EventService {
     private  ClubRepository clubRepository;
@@ -23,18 +31,24 @@ public class EventServiceImpl implements EventService {
     Club club = clubRepository.findById(clubId).get();
     Event event= mapToEvent(eventDTO);
     event.setClub(club);
+    eventRepository.save(event);
     }
 
-    private Event mapToEvent(EventDTO eventDTO) {
-        return Event.builder()
-                .id(eventDTO.getId())
-                .name(eventDTO.getName())
-                .startTime(eventDTO.getStartTime())
-                .endTime(eventDTO.getEndTime())
-                .type(eventDTO.getType())
-                .photoURL(eventDTO.getPhotoURL())
-                .createdOn(eventDTO.getCreatedOn())
-                .updateOn(eventDTO.getUpdateOn())
-                .build();
+    @Override
+    public List<EventDTO> findAllEvents() {
+        List<Event> events = eventRepository.findAll();
+        return events.stream().map(EventMapper::mapToEventDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public EventDTO findByEventId(Long eventId) {
+        Event event = eventRepository.findById(eventId).get();
+        return mapToEventDTO(event);
+    }
+
+    @Override
+    public void updateEvent(EventDTO eventDTO) {
+        Event event = mapToEvent(eventDTO);
+        eventRepository.save(event);
     }
 }

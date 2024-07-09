@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.bialek.runnersthymeleafproject.models.Club;
 
 import java.time.LocalDateTime;
 
@@ -20,4 +21,5 @@ public class EventDTO {
     private String photoURL;
     private LocalDateTime createdOn;
     private LocalDateTime updateOn;
+    private Club club;
 }
