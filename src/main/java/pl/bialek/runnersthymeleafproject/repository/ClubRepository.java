@@ -3,9 +3,8 @@ package pl.bialek.runnersthymeleafproject.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 @Repository

@@ -1,7 +1,7 @@
 package pl.bialek.runnersthymeleafproject.service;
 
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 
 import java.util.List;
 

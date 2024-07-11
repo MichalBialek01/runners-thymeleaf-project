@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.bialek.runnersthymeleafproject.DTO.EventDTO;
-import pl.bialek.runnersthymeleafproject.models.Event;
+import pl.bialek.runnersthymeleafproject.entity.Event;
 import pl.bialek.runnersthymeleafproject.service.EventService;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 @Controller
 public class EventController {

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 import pl.bialek.runnersthymeleafproject.service.ClubService;
 
 import java.util.List;

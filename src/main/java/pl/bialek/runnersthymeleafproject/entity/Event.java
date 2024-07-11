@@ -1,4 +1,4 @@
-package pl.bialek.runnersthymeleafproject.models;
+package pl.bialek.runnersthymeleafproject.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

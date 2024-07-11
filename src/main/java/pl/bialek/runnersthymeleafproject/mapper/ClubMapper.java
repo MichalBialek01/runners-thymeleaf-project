@@ -1,11 +1,9 @@
 package pl.bialek.runnersthymeleafproject.mapper;
 
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 
 import java.util.stream.Collectors;
-
-import static pl.bialek.runnersthymeleafproject.mapper.EventMapper.mapToEventDTO;
 
 public class ClubMapper {
     public static Club maptoClub(ClubDTO clubDTO) {

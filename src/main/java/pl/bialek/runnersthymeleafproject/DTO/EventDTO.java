@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 
 import java.time.LocalDateTime;
 

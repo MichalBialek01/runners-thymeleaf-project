@@ -1,8 +1,7 @@
 package pl.bialek.runnersthymeleafproject.mapper;
 
 import pl.bialek.runnersthymeleafproject.DTO.EventDTO;
-import pl.bialek.runnersthymeleafproject.models.Event;
-import pl.bialek.runnersthymeleafproject.service.EventService;
+import pl.bialek.runnersthymeleafproject.entity.Event;
 
 public class EventMapper {
     public static Event mapToEvent(EventDTO eventDTO) {

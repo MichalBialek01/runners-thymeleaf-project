@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
 import pl.bialek.runnersthymeleafproject.mapper.ClubMapper;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 import pl.bialek.runnersthymeleafproject.repository.ClubRepository;
 import pl.bialek.runnersthymeleafproject.service.ClubService;
 
