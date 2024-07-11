@@ -20,36 +20,44 @@ public class AuthController {
     public AuthController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/register")
-    public String getRegisterForm(Model model){
+    public String getRegisterForm(Model model) {
         //Need to be, whatever if it's empty
         RegistrationDTO user = new RegistrationDTO();
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "/register";
     }
+
     @PostMapping("register/save")
-    public String register(@Valid @ModelAttribute("user")RegistrationDTO user,
-                           BindingResult bindingResult, Model model){
+    public String register(@Valid @ModelAttribute("user") RegistrationDTO user,
+                           BindingResult bindingResult, Model model) {
 
         UserEntity existingUserEmail = userService.findUserByEmail(user.getEmail());
-        if(     existingUserEmail != null
-                &&existingUserEmail.getEmail() != null
-                && !existingUserEmail.getEmail().isEmpty()){
-            bindingResult.rejectValue("email","There is already a user with this email/username");
+        if (existingUserEmail != null
+                && existingUserEmail.getEmail() != null
+                && !existingUserEmail.getEmail().isEmpty()) {
+            return "redirect:/register?fail";
         }
 
         UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
-        if(     existingUserUsername != null
-                &&existingUserUsername.getUsername() != null
-                && !existingUserUsername.getUsername().isEmpty()){
-            bindingResult.rejectValue("username","There is already a user with this email/username");
+        if (existingUserUsername != null
+                && existingUserUsername.getUsername() != null
+                && !existingUserUsername.getUsername().isEmpty()) {
+                    return "redirect:/register?fail";
         }
 
-        if(bindingResult.hasErrors()){
-            model.addAttribute("user",user);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
             return "register";
         }
         userService.saveUser(user);
         return "redirect:/clubs?success";
     }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
 }
