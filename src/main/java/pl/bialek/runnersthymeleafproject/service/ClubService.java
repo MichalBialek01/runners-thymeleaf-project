@@ -1,12 +1,18 @@
 package pl.bialek.runnersthymeleafproject.service;
 
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
-import pl.bialek.runnersthymeleafproject.models.Club;
+import pl.bialek.runnersthymeleafproject.entity.Club;
 
 import java.util.List;
 
 public interface ClubService {
     List<ClubDTO> findAll();
-    Club saveClub(Club club);
+    Club saveClub(ClubDTO clubDto);
 
+    ClubDTO findClubById(long clubId);
+
+    void updateClub(ClubDTO club);
+
+    void deleteClub(Long clubId);
+    List<ClubDTO> searchClubs(String query);
 }
