@@ -1,6 +1,5 @@
 package pl.bialek.runnersthymeleafproject.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,22 +9,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.bialek.runnersthymeleafproject.DTO.EventDTO;
 import pl.bialek.runnersthymeleafproject.entity.Event;
+import pl.bialek.runnersthymeleafproject.entity.UserEntity;
+import pl.bialek.runnersthymeleafproject.security.SecurityUtil;
 import pl.bialek.runnersthymeleafproject.service.EventService;
+import pl.bialek.runnersthymeleafproject.service.UserService;
 
 import java.util.List;
 
 @Controller
 public class EventController {
     private final EventService eventService;
+    private final UserService userService;
 
-    @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userService) {
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     @GetMapping("/events")
     public String eventList(Model model) {
+        UserEntity user = new UserEntity();
         List<EventDTO> events = eventService.findAllEvents();
+        String username = SecurityUtil.getSesionUser();
+        if (username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user",user);
+        }
+        model.addAttribute("user",user);
         model.addAttribute("events", events);
         return "events-list";
     }
@@ -45,8 +55,8 @@ public class EventController {
                               @ModelAttribute("event") EventDTO eventDTO,
                               Model model,
                               BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            model.addAttribute("event",eventDTO);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("event", eventDTO);
             return "clubs-create";
         }
 
@@ -56,7 +66,15 @@ public class EventController {
 
     @GetMapping("/events/{eventId}")
     public String viewEvent(@PathVariable("eventId") Long eventId, Model model) {
+        UserEntity user = new UserEntity();
         EventDTO event = eventService.findByEventId(eventId);
+        String username = SecurityUtil.getSesionUser();
+        if (username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user",user);
+        }
+        model.addAttribute("club",event);
+        model.addAttribute("user",user);
         model.addAttribute("event", event);
         return "events-detail";
     }
@@ -84,9 +102,11 @@ public class EventController {
         eventService.updateEvent(event);
         return "redirect:/events" + eventId;
     }
-//    hard delete
+
+    //    hard delete
     @GetMapping("/events/{eventId}/delete")
-    public String deleteEvent(@PathVariable("eventId")Long eventId){
+
+    public String deleteEvent(@PathVariable("eventId") Long eventId) {
         eventService.delteteEvent(eventId);
         return "redirect:/events";
     }

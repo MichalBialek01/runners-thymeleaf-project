@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.bialek.runnersthymeleafproject.entity.UserEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +24,7 @@ public class ClubDTO {
     private LocalDateTime createdTime;
     private LocalDateTime updateTime;
     private List<EventDTO> events;
+    private UserEntity createdBy;
 
     public void updateClub(ClubDTO club) {
     }

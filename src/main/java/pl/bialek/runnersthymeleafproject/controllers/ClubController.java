@@ -8,18 +8,35 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.bialek.runnersthymeleafproject.DTO.ClubDTO;
 import pl.bialek.runnersthymeleafproject.entity.Club;
+import pl.bialek.runnersthymeleafproject.entity.UserEntity;
+import pl.bialek.runnersthymeleafproject.security.SecurityUtil;
 import pl.bialek.runnersthymeleafproject.service.ClubService;
+import pl.bialek.runnersthymeleafproject.service.UserService;
 
 import java.util.List;
 
 @Controller
 public class ClubController {
-    @Autowired
+
+
     private ClubService clubService;
+    private UserService userService;
+@Autowired
+    public ClubController(ClubService clubService, UserService userService) {
+        this.clubService = clubService;
+        this.userService = userService;
+    }
 
     @GetMapping("/clubs")
     public String getClubs(Model model) {
+        UserEntity user = new UserEntity();
         List<ClubDTO> clubs = clubService.findAll();
+        String username = SecurityUtil.getSesionUser();
+        if(username!=null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user",user);
+        }
+        model.addAttribute("user",user);
         model.addAttribute("clubs", clubs);
         return "clubs-list";
     }
@@ -66,7 +83,14 @@ public class ClubController {
     }
     @GetMapping("clubs/{clubId}")
     public String clubDetail(@PathVariable("clubId") Long clubId,Model model){
+        UserEntity user = new UserEntity();
         ClubDTO clubDTO = clubService.findClubById(clubId);
+        String username = SecurityUtil.getSesionUser();
+        if(username!=null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user",user);
+        }
+        model.addAttribute("user",user);
         model.addAttribute("club",clubDTO);
         return "clubs-detail";
     }
